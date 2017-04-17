@@ -36,4 +36,3 @@ ALTER DATABASE DATAFILE 'D:\oracle\Taller1.1\transacciones.dbf' RESIZE 200M;
 --5)Assign the dba role and permissions to connect to the user just created
 
 GRANT CREATE SESSION TO caredo;
-SourceTree
