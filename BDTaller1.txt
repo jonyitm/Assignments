@@ -36,3 +36,74 @@ ALTER DATABASE DATAFILE 'D:\oracle\Taller1.1\transacciones.dbf' RESIZE 200M;
 --5)Assign the dba role and permissions to connect to the user just created
 
 GRANT CREATE SESSION TO caredo;
+
+--6)Create 3 profiles
+
+--a. Profile 1: "manager_profile?" password life 40 days, one session per user, 15 minutes idle, 4
+--failed login attempts
+    CREATE PROFILE  PRF_manager_profile LIMIT
+    SESSIONS_PER_USER 1
+    PASSWORD_LIFE_TIME 40
+    IDLE_TIME 15
+    FAILED_LOGIN_ATTEMPTS 4
+
+
+--b. Profile 2: "finance_profile?" password life 15 days, one session per user, 5 minutes idle, 2
+--failed login attempts
+    CREATE PROFILE  PRF_finance_profile LIMIT
+    SESSIONS_PER_USER 1
+    PASSWORD_LIFE_TIME 15
+    IDLE_TIME 5
+    FAILED_LOGIN_ATTEMPTS 2
+
+
+--c. Profile 3: "service_profile?" password life 20 days, one session per user, 10 minutes idle, 3
+--failed login attempts
+
+    CREATE PROFILE  PRF_service_profile LIMIT
+    SESSIONS_PER_USER 1
+    PASSWORD_LIFE_TIME 20
+    IDLE_TIME 10
+    FAILED_LOGIN_ATTEMPTS 3
+
+--d. Profile 4: "development?" password life 100 days, two session per user, 30 minutes idle, no
+--failed login attempts
+    CREATE PROFILE  PRF_development LIMIT
+    SESSIONS_PER_USER 2
+    PASSWORD_LIFE_TIME 100
+    IDLE_TIME 30
+    FAILED_LOGIN_ATTEMPTS 2
+    
+--7)Create 1 role with the name "without_privileges?" and revoke ALL PRIVILEGES
+
+CREATE ROLE without_privileges;
+REVOKE ALL PRIVILEGES FROM without_privileges;
+
+--8)Create 4 users, assign them the tablespace "vehicles_fleet?"; profiles created should be used for the
+--  users, all the users should be allow to connect to the database. Use the role "without_privileges"? for
+--  users associate with profiles: manager_profile?, finance_profile? and service_profile
+
+    CREATE USER cliente1
+    IDENTIFIED BY cliente123 
+    DEFAULT TABLESPACE vehicles_fleet
+    GRANT CREATE SESSION TO cliente1;
+       
+    CREATE USER cliente2
+    IDENTIFIED BY cliente123 
+    DEFAULT TABLESPACE vehicles_fleet
+    GRANT CREATE SESSION TO cliente2;
+    
+    CREATE USER cliente3
+    IDENTIFIED BY cliente123 
+    DEFAULT TABLESPACE vehicles_fleet
+    GRANT CREATE SESSION TO cliente3;
+    
+    CREATE USER cliente4
+    IDENTIFIED BY cliente123 
+    DEFAULT TABLESPACE vehicles_fleet
+    GRANT CREATE SESSION TO cliente4;
+
+alter user cliente1 profile PRF_manager_profile;
+alter user cliente2 profile PRF_finance_profile;
+alter user cliente3 profile PRF_service_profile;
+alter user cliente4 profile PRF_manager_profile;
