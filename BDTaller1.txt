@@ -23,3 +23,17 @@ ONLINE;
 --3) Set the undo tablespace to be used in the system
 
 ALTER DATABASE DATAFILE 'D:\oracle\Taller1.1\transacciones.dbf' RESIZE 200M; 
+
+--4)Create a DBA user and assign it to the tablespace called "vehicles_fleet?", this user has unlimited
+--  space on the tablespace
+
+    CREATE USER caredo
+    IDENTIFIED BY caredo123 
+    DEFAULT TABLESPACE vehicles_fleet
+    QUOTA UNLIMITED ON vehicles_fleet;
+    
+       
+--5)Assign the dba role and permissions to connect to the user just created
+
+GRANT CREATE SESSION TO caredo;
+SourceTree
