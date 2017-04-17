@@ -1,0 +1,25 @@
+--1) Create 2 Tablespaces: one with 1 Gb and 2 datafiles, tablespace should be named "vehicles_fleet?"
+--   and the other one with the name "test_purposes?" with 500 Mb and 1 datafile.
+
+CREATE TABLESPACE vehicles_fleet DATAFILE
+'D:\oracle\Taller1.1\vehicles01_fleet.DBF' SIZE 500M,
+'D:\oracle\Taller1.1\vehicles02_fleet.DBF' SIZE 100M
+AUTOEXTEND ON NEXT 100K MAXSIZE 500M
+EXTENT MANAGEMENT LOCAL
+SEGMENT SPACE MANAGEMENT AUTO
+ONLINE;
+
+CREATE TABLESPACE test_purposes DATAFILE
+'D:\oracle\Taller1.1\test_purposes1.DBF' SIZE 500M
+ONLINE;
+
+
+--2) Create an Undo tablespace with 5Mb? of space and 1 datafile
+
+CREATE UNDO TABLESPACE transacciones DATAFILE
+'D:\oracle\Taller1.1\transacciones.dbf' SIZE 5M
+ONLINE;
+
+--3) Set the undo tablespace to be used in the system
+
+ALTER DATABASE DATAFILE 'D:\oracle\Taller1.1\transacciones.dbf' RESIZE 200M; 
