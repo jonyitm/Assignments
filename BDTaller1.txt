@@ -1,3 +1,9 @@
+--INTEGRANTES
+--Carlos eduardo rojas
+--johny ochoa
+--lizeth valencia
+--jhoan steven castañeda serna
+
 --1) Create 2 Tablespaces: one with 1 Gb and 2 datafiles, tablespace should be named "vehicles_fleet?"
 --   and the other one with the name "test_purposes?" with 500 Mb and 1 datafile.
 
@@ -107,3 +113,17 @@ alter user cliente1 profile PRF_manager_profile;
 alter user cliente2 profile PRF_finance_profile;
 alter user cliente3 profile PRF_service_profile;
 alter user cliente4 profile PRF_manager_profile;
+
+--9)Lock the users associate with profiles: manager_profile?, finance_profile? and service_profile
+-- co nel siguiente comando se desbloquean los usurarios (ALTER USER username ACCOUNT UNLOCK)
+
+ALTER USER cliente1 ACCOUNT LOCK;
+ALTER USER cliente2 ACCOUNT LOCK;
+ALTER USER cliente3 ACCOUNT LOCK;
+ALTER USER cliente4 ACCOUNT LOCK;
+
+--10) Delete the tablespace called "test_purposes?"
+
+DROP TABLESPACE TEST_PURPOSES1
+INCLUDING CONTENTS 
+CASCADE CONSTRAINTS;
